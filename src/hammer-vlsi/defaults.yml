@@ -663,6 +663,11 @@ mentor:
     common_path: "${vlsi.builtins.hammer_vlsi_path}/common/mentor"
     common_path_meta: subst
 
+openroad:
+    # Path to the folder with defaults.yml for common OpenROAD settings.
+    common_path: "${vlsi.builtins.hammer_vlsi_path}/common/openroad"
+    common_path_meta: subst
+
 # DRC settings
 drc.inputs:
   # Top RTL module.
@@ -760,7 +765,7 @@ technology.core:
     # Can be a wildcard/glob
     # type: str
     tap_cell_rail_reference: null
- 
+
 # Specific inputs for the simulation tool.
 # These inputs will vary based on if the simulation is for RTL, post synthesis, or post PAR.
 # There may be HAMMER simulation tool plugins available that include common simulator flags and inputs that can be modified/augmented for the user's needs.
@@ -784,9 +789,14 @@ sim.inputs:
   defines: []
 
   # C compiler options used when generating the simulation executable
-  # For example: when passed to VCS, each compiler_opt will be added as "-CC " + {compiler_opt}
+  # For example: when passed to VCS, each compiler_cc_opt will be added as "-CC " + {compiler_cc_opt}
   # type: List[str]
-  compiler_opts: []
+  compiler_cc_opts: []
+
+  # C linker options used when generating the simulation executable
+  # For example: when passed to VCS, each compiler_ld_opt will be added as "-LDFLAGS " + {compiler_ld_opt}
+  # type: List[str]
+  compiler_ld_opts: []
 
   # Simulation timescale
   # This is passed as a plain string
@@ -917,6 +927,14 @@ power.inputs:
   # A list of paths to VCD waveforms to be used for dynamic power analysis.
   # type: List[str]
   waveforms: []
+ 
+  # A list of analysis start times corresponding to each waveform used for dynamic power analysis.
+  # type: List[str]
+  start_times: []
+
+  # A list of analysis end times corresponding to each waveform used for dynamic power analysis.
+  # type: List[str]
+  end_times: []
 
   # A list of paths to SAIF activity files to be used for dynamic power analysis.
   # type: List[str]
